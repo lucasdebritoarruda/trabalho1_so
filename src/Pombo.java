@@ -23,6 +23,15 @@ public class Pombo implements Runnable {
 			System.out.println("Aguarde!");
 		}
 	}
+	
+	private void carregar() {
+		long startTime = System.currentTimeMillis();
+
+		while (this.tc >= (System.currentTimeMillis() - startTime)) {
+			System.out.println("Descarregando!");
+		}
+	}
+
 
 	private void descarregar() {
 		long startTime = System.currentTimeMillis();
@@ -35,18 +44,19 @@ public class Pombo implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-//		while (true) {
-//			System.out.println("Voando para B!");
-//			voando();
-//			descarregar();
-//			System.out.println("Voltando para A!");
-//			voando();
-//		}
-		try {
-			CaixaPostal.getInstance().getP().acquire();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		carregar();
+		CaixaPostal.getInstance().getM().release(this.N);
+		voando();
+		descarregar();
+		voando();
+		if(CaixaPostal.getInstance().MaxQtCartasnaCaixa - 
+				CaixaPostal.getInstance().getM().availablePermits() < this.N){
+			try {
+				CaixaPostal.getInstance().getP().acquire();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -75,7 +85,7 @@ public class Pombo implements Runnable {
 	}
 
 	public int getTd() {
-		return td;
+		return td; 
 	}
 
 	public void setTd(int td) {

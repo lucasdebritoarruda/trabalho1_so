@@ -13,11 +13,16 @@ public class Usuario implements Runnable {
 		// TODO Auto-generated method stub
 		while (true) {
 			escrevendo();
-			try {
-				CaixaPostal.getInstance().getM().acquire();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(CaixaPostal.getInstance().getM().availablePermits() != CaixaPostal.getInstance().pombo.N){
+				try {
+					CaixaPostal.getInstance().getM().acquire();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				CaixaPostal.getInstance().getP().release();
 			}
 			
 	}

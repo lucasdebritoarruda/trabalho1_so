@@ -7,7 +7,8 @@ public final class CaixaPostal {
 	private static final CaixaPostal INSTANCE = new CaixaPostal();
 	private static Semaphore M; // SEMAFORO DOS USUARIOS
 	private static Semaphore P = new Semaphore(0);
-	
+	public static Pombo pombo;
+	public int MaxQtCartasnaCaixa; 
 
 	/**
 	 * Launch the application.
@@ -20,17 +21,16 @@ public final class CaixaPostal {
 	 * Create the application.
 	 */
 	private CaixaPostal() {
-		int k = 1;
-		k = Integer
+		this.MaxQtCartasnaCaixa = Integer
 				.parseInt(JOptionPane
 						.showInputDialog("Insira a capacidade da caixa postal :"));
-		this.setM(new Semaphore(k));
+		this.setM(new Semaphore(this.MaxQtCartasnaCaixa));
 		int a = Integer.parseInt(JOptionPane.showInputDialog("Quantas mensagens o pombo pode transportar?"));
 		int b = Integer.parseInt(JOptionPane.showInputDialog("Qual o tempo de carga?"));
 		int c = Integer.parseInt(JOptionPane.showInputDialog("Qual o tempo de voo?"));
 		int d = Integer.parseInt(JOptionPane.showInputDialog("Qual o tempo de descarga?"));
-		Pombo p = new Pombo(a,b,c,d);
-		Thread t = new Thread(p);
+		pombo = new Pombo(a,b,c,d);
+		Thread t = new Thread(pombo);
 		t.start();
 		
 	}
