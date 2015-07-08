@@ -11,9 +11,7 @@ public final class CaixaPostal {
 	public int MaxQtCartasnaCaixa; 
 
 
-	public static void main(String[] args) {
-		//CaixaPostal window = new CaixaPostal();
-	}
+	public static void main(String[] args) {}
 
 	
 	private CaixaPostal() {
