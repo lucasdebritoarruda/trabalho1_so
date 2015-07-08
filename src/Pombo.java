@@ -44,19 +44,21 @@ public class Pombo implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		carregar();
-		CaixaPostal.getInstance().getM().release(this.N);
-		voando();
-		descarregar();
-		voando();
-		if(CaixaPostal.getInstance().MaxQtCartasnaCaixa - 
-				CaixaPostal.getInstance().getM().availablePermits() < this.N){
-			try {
-				CaixaPostal.getInstance().getP().acquire();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		while(true){
+			if(CaixaPostal.getInstance().MaxQtCartasnaCaixa - 
+					CaixaPostal.getInstance().getM().availablePermits() < this.N){
+				try {
+					CaixaPostal.getInstance().getP().acquire();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			carregar();
+			CaixaPostal.getInstance().getM().release(this.N);
+			voando();
+			descarregar();
+			voando();
 		}
 	}
 
