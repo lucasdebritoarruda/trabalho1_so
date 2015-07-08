@@ -48,6 +48,7 @@ public class Pombo implements Runnable {
 			if(CaixaPostal.getInstance().MaxQtCartasnaCaixa - 
 					CaixaPostal.getInstance().getM().availablePermits() < this.N){
 				try {
+					System.out.println("Dormiu!");
 					CaixaPostal.getInstance().getP().acquire();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block

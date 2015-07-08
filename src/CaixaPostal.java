@@ -10,16 +10,12 @@ public final class CaixaPostal {
 	public static Pombo pombo;
 	public int MaxQtCartasnaCaixa; 
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
-		CaixaPostal window = new CaixaPostal();
+		//CaixaPostal window = new CaixaPostal();
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
 	private CaixaPostal() {
 		this.MaxQtCartasnaCaixa = Integer
 				.parseInt(JOptionPane
@@ -35,9 +31,6 @@ public final class CaixaPostal {
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 
 	public static CaixaPostal getInstance() {
 		return INSTANCE;
